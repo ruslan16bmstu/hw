@@ -24,10 +24,9 @@ install:
   - sudo cmake CMakeLists.txt
   - sudo make
   - sudo cp *.a /usr/lib
+  - cd -
 
 before_script:
-    - cd
-    - cd ruslan16bmstu/hw
     - mkdir build
     - cd build
 
