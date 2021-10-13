@@ -14,13 +14,12 @@ env:
     global:
         - CODECOV_TOKEN='73c6423c-dc82-42d0-b242-38d3f5f77f7c'
 
-addons:
-    apt:
-        packages:
-            - valgrind
-            - cppcheck
-            - make
-            - cmake
+install:
+  - sudo apt update
+  - sudo apt install valgrind
+  - sudo apt install cppcheck
+  - sudo apt-get install gcov
+  - sudo apt-get install libgtest-dev
 
 before_script:
     - mkdir build
@@ -29,10 +28,9 @@ before_script:
 script:
     - cmake ..
     - make
+    - valgrind ./mylib_tests
     - cd ..
-    - cppcheck main.c mylib.c
-    - ctest < test.txt --output-on-failure
-    - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then valgrind --tool=memcheck --leak-check=yes ctest < test.txt ; fi
+    - cppcheck --inconclusive --enable=all --language=c ./mylib.c ./main.c
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
