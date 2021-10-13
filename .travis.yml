@@ -1,6 +1,4 @@
-dist:     trusty
-
-sudo:     required
+dist:     bionic
 
 language: c
 
@@ -15,7 +13,6 @@ env:
         - CODECOV_TOKEN='73c6423c-dc82-42d0-b242-38d3f5f77f7c'
 
 install:
-  - sudo apt update
   - sudo apt-get install valgrind
   - sudo apt-get install cppcheck
   - sudo apt-get install libgtest-dev
