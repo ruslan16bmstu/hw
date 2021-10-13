@@ -13,7 +13,15 @@ compiler:
 env:
     global:
         - CODECOV_TOKEN='73c6423c-dc82-42d0-b242-38d3f5f77f7c'
-        
+
+addons:
+    apt:
+        packages:
+            - gcov
+            - valgrind
+            - cppcheck
+            - make
+            - cmake
 
 before_script:
     - mkdir build
@@ -24,6 +32,8 @@ script:
     - make
     - cd ..
     - cppcheck main.c mylib.c
+    - ctest < test.txt --output-on-failure
+    - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then valgrind --tool=memcheck --leak-check=yes ctest < test.txt ; fi
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
