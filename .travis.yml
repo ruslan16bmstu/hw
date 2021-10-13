@@ -18,6 +18,8 @@ install:
   - sudo apt-get install valgrind
   - sudo apt-get install cppcheck
   - sudo apt-get install libgtest-dev
+  - sudo apt install make
+  - sudo apt install cmake
 
 before_script:
     - mkdir build
