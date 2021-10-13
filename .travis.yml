@@ -1,0 +1,29 @@
+dist:     trusty
+
+sudo:     required
+
+language: c
+
+os:
+    - linux
+
+compiler:
+    - gcc
+
+env:
+    global:
+        - CODECOV_TOKEN='73c6423c-dc82-42d0-b242-38d3f5f77f7c'
+        
+
+before_script:
+    - mkdir build
+    - cd build
+
+script:
+    - cmake ..
+    - make
+    - cd ..
+    - cppcheck main.c mylib.c
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
