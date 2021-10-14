@@ -10,7 +10,7 @@ compiler:
 
 env:
     global:
-        - CODECOV_TOKEN='73c6423c-dc82-42d0-b242-38d3f5f77f7c'
+        - CODECOV_TOKEN='3dc12957-9b32-4b71-8ace-c258665b3c40'
 
 install:
   - sudo apt-get install valgrind

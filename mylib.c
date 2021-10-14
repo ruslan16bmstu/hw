@@ -79,10 +79,14 @@ output *autor_is_perf_output(database *Database) {
     Output->titles =
         (char **)malloc(sizeof(char *) * Database->autor_is_performer_count);
 
-    for (int i = 0; i < Database->autor_is_performer_count; ++i) {
-      Output->titles[i] =
-          (char *)malloc(strlen(Database->track_ptr[i].title) + 1);
-      strcpy(Output->titles[i], Database->track_ptr[i].title);
+    int k = 0;
+    for (int i = 0; i < Database->db_size; ++i) {
+      if (Database->track_ptr[i].autor_is_performer_flag == 1) {
+        Output->titles[k] =
+            (char *)malloc(strlen(Database->track_ptr[i].title) + 1);
+        strcpy(Output->titles[k], Database->track_ptr[i].title);
+        ++k;
+      }
     }
     return Output;
   }
