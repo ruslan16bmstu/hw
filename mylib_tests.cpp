@@ -4,6 +4,49 @@ extern "C" {
 #include "mylib.h"
 }
 
+TEST(autor_is_perf_test, Assert_0) {
+
+  database *Database = NULL;
+
+  output *Output = autorIsPerfOutput(Database);
+
+  bool isNULL = 0;
+  if (Output == NULL){
+    isNULL = 1;
+  }
+
+  EXPECT_EQ(isNULL, 1);
+}
+
+TEST(autor_is_perf_test, Assert_1) {
+
+  database Database;
+
+  Database.dataSize = 1;
+  Database.autorIsPerformerCount = 0;
+  Database.trackPtr = (track *)malloc(sizeof(track) * Database.dataSize);
+
+  Database.trackPtr[0].autor = (char *)malloc(strlen("abc") + 1);
+  strcpy(Database.trackPtr[0].autor, "abc");
+
+  Database.trackPtr[0].performer = (char *)malloc(strlen("abc") + 1);
+  strcpy(Database.trackPtr[0].performer, "abc");
+
+  Database.trackPtr[0].title = (char *)malloc(strlen("xyz") + 1);
+  strcpy(Database.trackPtr[0].title, "xyz");
+
+  Database.trackPtr[0].duration = 45;
+
+  Database.trackPtr[0].autorIsPerformerFlag = 0;
+
+  output *Output = autorIsPerfOutput(&Database);
+
+  EXPECT_EQ(strcmp(Output->titles[0], "xyz"), 0);
+
+  freeOutput(Output);
+  freeData(&Database);
+}
+
 TEST(autor_is_perf_test, Assert_1) {
 
   database Database;
