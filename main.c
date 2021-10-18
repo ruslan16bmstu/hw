@@ -10,11 +10,11 @@ int main(int argc, char **argv) {
   scanf("%d", &size);
 
   database Database;
-  Database.track_ptr = (track *)malloc(sizeof(track) * size);
+  Database.trackPtr = (track *)malloc(sizeof(track) * size);
 
-  data_init(&Database, size);
+  dataInit(&Database, size);
 
-  output *Output = autor_is_perf_output(&Database);
+  output *Output = autorIsPerfOutput(&Database);
 
   if (Output != NULL) {
     for (int i = 0; i < Output->size; ++i) {
@@ -22,9 +22,9 @@ int main(int argc, char **argv) {
     }
   }
 
-  free_output(Output);
+  freeOutput(Output);
 
-  free_data(&Database);
+  freeData(&Database);
 
   return 0;
 }

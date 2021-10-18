@@ -6,31 +6,31 @@
 
 #define MAX_BUF_SIZE 128
 
-typedef struct output {
+typedef struct output_t {
   char **titles;
   int size;
 } output;
 
-typedef struct track {
+typedef struct track_t {
   char *autor;     // автор
   char *performer; // исполнитель
   char *title;     // название трека
   int duration;    // длительность трека
-  bool autor_is_performer_flag;
+  bool autorIsPerformerFlag;
 } track;
 
-typedef struct database {
-  track *track_ptr;
-  int db_size;
-  int autor_is_performer_count;
+typedef struct database_t {
+  track *trackPtr;
+  int dataSize;
+  int autorIsPerformerCount;
 } database;
 
-void free_data(database *data);
+void freeData(database *data);
 
-void data_init(database *data, const int size);
+void dataInit(database *data, const int size);
 
-output *autor_is_perf_output(database *data);
+bool autorIsPerf(database *Database);
 
-void free_output(output *Output);
+output *autorIsPerfOutput(database *data);
 
-void file_input(database *Database);
+void freeOutput(output *Output);
